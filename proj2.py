@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 import sqlite3
+import sql
 
 root = Tk()
 root.title('Adult Income Dataset')
@@ -8,22 +9,7 @@ root.geometry('1000x500')
 # root['background'] = '#183940'
 
 # connect to database
-conn = sqlite3.connect("adult_income.db")
-c = conn.cursor()
-c.execute("""CREATE TABLE if not exists income (
-    age integer,
-    workclass text,
-    education text, 
-    occupation text,
-    race text,
-    gender text,
-    hoursperweek text,
-    nativecountry text,
-    income integer)
-    """)
-
-conn.commit()
-conn.close()
+db = sql.Database("adult_income.db")
 
 # Treeview
 style = ttk.Style()
@@ -131,20 +117,18 @@ income_entry.grid(row=2, column=5, padx=30, pady=10)
 
 # database
 def query_database():
-    conn = sqlite3.connect('adult_income.db')
-    c = conn.cursor()
-    c.execute("SELECT * FROM adult_income")
-    records = c.fetchall()
+    records = db.fetch()
 
     global count
     count = 0
 
     for record in records:
+        print(record)
         if count % 2 == 0:
-            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8]), tags=('evenrow', ))
+            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8], record[9]), tags=('evenrow', ))
 
         else:
-            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8]), tags=('oddrow', ))
+            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8], record[9]), tags=('oddrow', ))
         count += 1
 
 # clear boxes
@@ -241,7 +225,6 @@ view_button.grid(row=0, column=5, padx=20, pady=10)
 # bind treeview
 my_tree.bind("<ButtonRelease-1>", select_record)
 
-query_database()
-
-
-root.mainloop()
+if __name__ == "__main__":
+    query_database()
+    root.mainloop()

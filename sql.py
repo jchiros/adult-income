@@ -12,8 +12,8 @@ class Database:
 	"occupation"	TEXT,
 	"race"	TEXT,
 	"gender"	TEXT,
-	"hours-per-week"	INTEGER,
-	"native-country"	TEXT,
+	"hours_per_week"	INTEGER,
+	"native_country"	TEXT,
 	"income"	TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
         )"""
@@ -21,7 +21,7 @@ class Database:
         self.con.commit()
 
     def insert(self, age, workclass, education, occupation, race, gender, hours_per_week, native_country, income):
-        self.cur.execute("INSERT INTO adult_income_dataset(age, workclass, education, occupation, race, gender, hours-per-week, native-country, income) VALUES (?,?,?,?,?,?,?,?,?)",
+        self.cur.execute("INSERT INTO adult_income_dataset(age, workclass, education, occupation, race, gender, hours_per_week, native_country, income) VALUES (?,?,?,?,?,?,?,?,?)",
                          (age, workclass, education, occupation, race, gender, hours_per_week, native_country, income))
         self.con.commit()
     
@@ -35,8 +35,8 @@ class Database:
         self.con.commit()
 
     def update(self, id, age, workclass, education, occupation, race, gender, hours_per_week, native_country, income):
-        self.cur.execute("UPDATE adult_income_dataset SET age=?, workclass=?, education=?, occupation=?, race=?, gender=?, hours-per-week=?, native-country=?, income=? WHERE id=?",
-                         (age, workclass, education, occupation, race, gender, hours_per_week, native_country, income))
+        self.cur.execute("UPDATE adult_income_dataset SET age=?, workclass=?, education=?, occupation=?, race=?, gender=?, hours_per_week=?, native_country=?, income=? WHERE id=?",
+                         (age, workclass, education, occupation, race, gender, hours_per_week, native_country, income, id))
         self.con.commit()
 
 ##    def search(self, age, workclass, education, occupation, race, gender, hours_per_week, native_country, income):

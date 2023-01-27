@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 import sqlite3
 import sql
 
@@ -182,7 +183,6 @@ def delete_record():
     my_tree.delete(x)
 
 
-
 # update record
 def update_record():
     # grab record number
@@ -205,8 +205,11 @@ def update_record():
 
 # insert record
 def insert_record():
+    global count
     db.insert(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get())
-    
+    my_tree.insert(parent='', index='end', iid=count, text="", values=(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get()))
+    count += 1
+    messagebox.showinfo("", "Record Added")
 
 
 # buttons

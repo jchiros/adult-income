@@ -125,10 +125,10 @@ def query_database():
 
     for record in records:
         if count % 2 == 0:
-            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[1], record[2], record[3], record[5], record[6], record[7], record[8], record[9], record[10]), tags=('evenrow', record[0]))
+            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[1:]), tags=('evenrow', record[0]))
 
         else:
-            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[1], record[2], record[3], record[5], record[6], record[7], record[8], record[9], record[10]), tags=('oddrow', record[0]))
+            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[1:]), tags=('oddrow', record[0]))
         count += 1
 
 # clear boxes

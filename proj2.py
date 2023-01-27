@@ -115,6 +115,7 @@ income_label.grid(row=2, column=4, padx=30, pady=10)
 income_entry = Entry(data_frame)
 income_entry.grid(row=2, column=5, padx=30, pady=10)
 
+
 # database
 def query_database():
     records = db.fetch()
@@ -123,12 +124,11 @@ def query_database():
     count = 0
 
     for record in records:
-        print(record)
         if count % 2 == 0:
-            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8], record[9]), tags=('evenrow', ))
+            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[1], record[2], record[3], record[5], record[6], record[7], record[8], record[9], record[10]), tags=('evenrow', record[0]))
 
         else:
-            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8], record[9]), tags=('oddrow', ))
+            my_tree.insert(parent='', index='end', iid=count, text='', values=(record[1], record[2], record[3], record[5], record[6], record[7], record[8], record[9], record[10]), tags=('oddrow', record[0]))
         count += 1
 
 # clear boxes
@@ -160,6 +160,7 @@ def select_record(e):
     selected = my_tree.focus()
     # grab values
     values = my_tree.item(selected, 'values')
+    primary_key = my_tree.item(selected, 'tags')[1]
 
     # output
     age_entry.insert(0, values[0])
@@ -174,9 +175,11 @@ def select_record(e):
 
 # delete record
 def delete_record():
+    selected = my_tree.focus()
+    primary_key = int(my_tree.item(selected, 'tags')[1])
+    db.remove(primary_key)
     x = my_tree.selection()[0]
     my_tree.delete(x)
-
 
 
 
@@ -184,9 +187,11 @@ def delete_record():
 def update_record():
     # grab record number
     selected = my_tree.focus()
+    primary_key = int(my_tree.item(selected, 'tags')[1])
     # update record
+    db.update(primary_key, age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get())
     my_tree.item(selected, text="", values=(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get(),))
-
+    
     # Clear
     age_entry.delete(0, END)
     work_entry.delete(0, END)
@@ -198,13 +203,18 @@ def update_record():
     nc_entry.delete(0, END)
     income_entry.delete(0, END)
 
+# insert record
+def insert_record():
+    db.insert(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get())
+    
+
 
 # buttons
 
 button_frame = LabelFrame(root, text="")
 button_frame.pack(fill="x", expand="yes", padx=20)
 
-add_button = Button(button_frame, text="Add", width=10)
+add_button = Button(button_frame, text="Add", command=insert_record, width=10)
 add_button.grid(row=0, column=0, padx=30, pady=10)
 
 update_button = Button(button_frame, text="Update", command=update_record, width=10)

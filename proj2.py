@@ -176,11 +176,24 @@ def select_record(e):
 
 # delete record
 def delete_record():
-    selected = my_tree.focus()
-    primary_key = int(my_tree.item(selected, 'tags')[1])
-    db.remove(primary_key)
-    x = my_tree.selection()[0]
-    my_tree.delete(x)
+    my_tree.tag_configure('oddrow', background="white")
+    my_tree.tag_configure('evenrow', background="#95969c")
+
+    ans = messagebox.askyesno("", "Are you sure you want to delete this record?")
+    if ans:
+        selected = my_tree.focus()
+        primary_key = int(my_tree.item(selected, 'tags')[1])
+        db.remove(primary_key)
+        x = my_tree.selection()[0]
+        my_tree.delete(x)
+        messagebox.showinfo("", "Record Deleted")
+        for i, item in enumerate(my_tree.get_children()):
+            if i % 2 == 0:
+                my_tree.item(item, tags=("evenrow",))
+            else:
+                my_tree.item(item, tags=("oddrow",))
+        
+            
 
 
 # update record
@@ -191,7 +204,7 @@ def update_record():
     # update record
     db.update(primary_key, age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get())
     my_tree.item(selected, text="", values=(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get(),))
-    
+    messagebox.showinfo("", "Record Updated")
     # Clear
     age_entry.delete(0, END)
     work_entry.delete(0, END)
@@ -205,34 +218,37 @@ def update_record():
 
 # insert record
 def insert_record():
+    my_tree.tag_configure('oddrow', background="white")
+    my_tree.tag_configure('evenrow', background="#95969c")
+
     global count
     db.insert(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get())
-    my_tree.insert(parent='', index='end', iid=count, text="", values=(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get()))
+    if count % 2 == 0:
+        my_tree.insert(parent='', index='end', iid=count, text="", values=(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get()), tags=('evenrow', ))
+    else:
+        my_tree.insert(parent='', index='end', iid=count, text="", values=(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get()), tags=('oddrow', ))
+        
     count += 1
     messagebox.showinfo("", "Record Added")
 
-
-# buttons
+#buttons
 
 button_frame = LabelFrame(root, text="")
 button_frame.pack(fill="x", expand="yes", padx=20)
 
-add_button = Button(button_frame, text="Add", command=insert_record, width=10)
+add_button = Button(button_frame, text="Add", command=insert_record, width=15)
 add_button.grid(row=0, column=0, padx=30, pady=10)
 
-update_button = Button(button_frame, text="Update", command=update_record, width=10)
+update_button = Button(button_frame, text="Update", command=update_record, width=15)
 update_button.grid(row=0, column=1, padx=45, pady=10)
 
-delete_button = Button(button_frame, text="Delete", command=delete_record, width=10)
+delete_button = Button(button_frame, text="Delete", command=delete_record, width=15)
 delete_button.grid(row=0, column=2, padx=45, pady=10)
 
-save_button = Button(button_frame, text="Save", width=10)
-save_button.grid(row=0, column=3, padx=45, pady=10)
-
-clear_button = Button(button_frame, text="Clear", command=clear_entries, width=10)
+clear_button = Button(button_frame, text="Clear", command=clear_entries, width=15)
 clear_button.grid(row=0, column=4, padx=45, pady=10)
 
-view_button = Button(button_frame, text="View", command=select_record, width=10)
+view_button = Button(button_frame, text="View", command=select_record, width=15)
 view_button.grid(row=0, column=5, padx=20, pady=10)
 
 # bind treeview

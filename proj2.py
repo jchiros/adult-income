@@ -73,12 +73,13 @@ data_frame.pack(fill="x", expand="yes", padx=20)
 
 age_label = Label(data_frame, text="Age", bd=1, justify="left")
 age_label.grid(row=0, column=0, padx=10, pady=10)
-age_entry = Entry(data_frame)
+age_entry = Spinbox(data_frame, from_=1, to=120, width=18)
+age_entry.delete(0, "end")
 age_entry.grid(row=0, column=1, padx=10, pady=10)
 
 work_label = Label(data_frame, text="Workclass", justify="left")
 work_label.grid(row=0, column=2, padx=10, pady=10)
-work_entry = Entry(data_frame)
+work_entry = ttk.Combobox(data_frame, values=["Private", "Local-gov", "Federal-gov", "Self-emp-not-inc"],width=18)
 work_entry.grid(row=0, column=3, padx=10, pady=10)
 
 educ_label = Label(data_frame, text="Education", justify="left")
@@ -98,7 +99,7 @@ race_entry.grid(row=1, column=3, padx=20, pady=10)
 
 gender_label = Label(data_frame, text="Gender", justify="left")
 gender_label.grid(row=1, column=4, padx=20, pady=10)
-gender_entry = Entry(data_frame)
+gender_entry = ttk.Combobox(data_frame, values=["Female", "Male"],width=18)
 gender_entry.grid(row=1, column=5, padx=20, pady=10)
 
 hpr_label = Label(data_frame, text="Hours per Week", justify="left")
@@ -113,7 +114,7 @@ nc_entry.grid(row=2, column=3, padx=30, pady=10)
 
 income_label = Label(data_frame, text="Income", justify="left")
 income_label.grid(row=2, column=4, padx=30, pady=10)
-income_entry = Entry(data_frame)
+income_entry = ttk.Combobox(data_frame, values=[">50K", "<=50K"],width=18)
 income_entry.grid(row=2, column=5, padx=30, pady=10)
 
 

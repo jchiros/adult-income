@@ -26,7 +26,7 @@ class Database:
         self.con.commit()
     
     def fetch(self):
-        self.cur.execute("SELECT * FROM adult_income_dataset LIMIT 100")
+        self.cur.execute("SELECT * FROM adult_income_dataset")
         rows = self.cur.fetchall()
         return rows
 

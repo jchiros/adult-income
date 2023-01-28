@@ -185,14 +185,9 @@ def delete_record():
         selected = my_tree.focus()
         primary_key = int(my_tree.item(selected, 'tags')[1])
         db.remove(primary_key)
-        x = my_tree.selection()[0]
-        my_tree.delete(x)
+        my_tree.delete(*my_tree.get_children())
+        query_database()
         messagebox.showinfo("", "Record Deleted")
-        for i, item in enumerate(my_tree.get_children()):
-            if i % 2 == 0:
-                my_tree.item(item, tags=("evenrow",))
-            else:
-                my_tree.item(item, tags=("oddrow",))
         
             
 
@@ -222,15 +217,11 @@ def insert_record():
     my_tree.tag_configure('oddrow', background="white")
     my_tree.tag_configure('evenrow', background="#95969c")
 
-    global count
     db.insert(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get())
-    if count % 2 == 0:
-        my_tree.insert(parent='', index='end', iid=count, text="", values=(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get()), tags=('evenrow', ))
-    else:
-        my_tree.insert(parent='', index='end', iid=count, text="", values=(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get()), tags=('oddrow', ))
-        
-    count += 1
+
     messagebox.showinfo("", "Record Added")
+    my_tree.delete(*my_tree.get_children())
+    query_database()
 
 #buttons
 

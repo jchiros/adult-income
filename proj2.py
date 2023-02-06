@@ -1,8 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-import sqlite3
 import sql
+import data_analytics as da
 
 root = Tk()
 root.title('Adult Income Dataset')
@@ -223,6 +223,11 @@ def insert_record():
     my_tree.delete(*my_tree.get_children())
     query_database()
 
+# view data
+def view_data():
+    df = da.pd.DataFrame(db.fetch(), columns=["primary_key", "age", "workclass", "education", "occupation", "race", "gender", "hours_per_week", "native_country", "income"])
+    da.plot_agerace(df)
+
 #buttons
 
 button_frame = LabelFrame(root, text="")
@@ -240,7 +245,7 @@ delete_button.grid(row=0, column=2, padx=45, pady=10)
 clear_button = Button(button_frame, text="Clear", command=clear_entries, width=15)
 clear_button.grid(row=0, column=4, padx=45, pady=10)
 
-view_button = Button(button_frame, text="View", command=select_record, width=15)
+view_button = Button(button_frame, text="View", command=view_data, width=15)
 view_button.grid(row=0, column=5, padx=20, pady=10)
 
 # bind treeview

@@ -79,7 +79,7 @@ age_entry.grid(row=0, column=1, padx=10, pady=10)
 
 work_label = Label(data_frame, text="Workclass", justify="left")
 work_label.grid(row=0, column=2, padx=10, pady=10)
-work_entry = ttk.Combobox(data_frame, values=["Private", "Local-gov", "Federal-gov", "Self-emp-not-inc"],width=18)
+work_entry = ttk.Combobox(data_frame, values=["Private", "Public", "Local-gov", "Federal-gov", "State-gov", "Self-emp-inc", "Self-emp-not-inc", "Without Pay", "Never Worked"],width=18)
 work_entry.grid(row=0, column=3, padx=10, pady=10)
 
 educ_label = Label(data_frame, text="Education", justify="left")

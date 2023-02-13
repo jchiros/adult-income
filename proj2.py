@@ -6,9 +6,8 @@ import data_analytics as da
 
 root = Tk()
 root.title('Adult Income Dataset')
-root.geometry('1000x500')
-# root['background'] = '#183940'
-
+root.geometry('1040x500')
+root['background'] = '#404258'
 # connect to database
 db = sql.Database("adult_income.db")
 
@@ -68,51 +67,51 @@ my_tree.tag_configure('evenrow', background="#95969c")
 
 
 # entry boxes
-data_frame = LabelFrame(root, text="")
+data_frame = LabelFrame(root, text="", background="#474E68")
 data_frame.pack(fill="x", expand="yes", padx=20)
 
-age_label = Label(data_frame, text="Age", bd=1, justify="left")
+age_label = Label(data_frame, text="Age", bd=1, justify="left", bg='#474E68', fg='white', font='Helvetica 10 bold')
 age_label.grid(row=0, column=0, padx=10, pady=10)
 age_entry = Spinbox(data_frame, from_=1, to=120, width=18)
 age_entry.delete(0, "end")
 age_entry.grid(row=0, column=1, padx=10, pady=10)
 
-work_label = Label(data_frame, text="Workclass", justify="left")
+work_label = Label(data_frame, text="Workclass", justify="left", bg='#474E68', fg='white', font='Helvetica 10 bold')
 work_label.grid(row=0, column=2, padx=10, pady=10)
 work_entry = ttk.Combobox(data_frame, values=["Private", "Public", "Local-gov", "Federal-gov", "State-gov", "Self-emp-inc", "Self-emp-not-inc", "Without Pay", "Never Worked"],width=18)
 work_entry.grid(row=0, column=3, padx=10, pady=10)
 
-educ_label = Label(data_frame, text="Education", justify="left")
+educ_label = Label(data_frame, text="Education", justify="left", bg='#474E68', fg='white', font='Helvetica 10 bold')
 educ_label.grid(row=0, column=4, padx=10, pady=10)
 educ_entry = Entry(data_frame)
 educ_entry.grid(row=0, column=5, padx=10, pady=10)
 
-occu_label = Label(data_frame, text="Occupation", justify="left")
+occu_label = Label(data_frame, text="Occupation", justify="left", bg='#474E68', fg='white', font='Helvetica 10 bold')
 occu_label.grid(row=1, column=0, padx=20, pady=10)
 occu_entry = Entry(data_frame)
 occu_entry.grid(row=1, column=1, padx=20, pady=10)
 
-race_label = Label(data_frame, text="Race", justify="left")
+race_label = Label(data_frame, text="Race", justify="left", bg='#474E68', fg='white', font='Helvetica 10 bold')
 race_label.grid(row=1, column=2, padx=20, pady=10)
 race_entry = Entry(data_frame)
 race_entry.grid(row=1, column=3, padx=20, pady=10)
 
-gender_label = Label(data_frame, text="Gender", justify="left")
+gender_label = Label(data_frame, text="Gender", justify="left", bg='#474E68', fg='white', font='Helvetica 10 bold')
 gender_label.grid(row=1, column=4, padx=20, pady=10)
 gender_entry = ttk.Combobox(data_frame, values=["Female", "Male"],width=18)
 gender_entry.grid(row=1, column=5, padx=20, pady=10)
 
-hpr_label = Label(data_frame, text="Hours per Week", justify="left")
+hpr_label = Label(data_frame, text="Hours per Week", justify="left", bg='#474E68', fg='white', font='Helvetica 10 bold')
 hpr_label.grid(row=2, column=0, padx=30, pady=10)
 hpr_entry = Entry(data_frame)
 hpr_entry.grid(row=2, column=1, padx=30, pady=10)
 
-nc_label = Label(data_frame, text="Native Country", justify="left")
+nc_label = Label(data_frame, text="Native Country", justify="left", bg='#474E68', fg='white', font='Helvetica 10 bold')
 nc_label.grid(row=2, column=2, padx=30, pady=10)
 nc_entry = Entry(data_frame)
 nc_entry.grid(row=2, column=3, padx=30, pady=10)
 
-income_label = Label(data_frame, text="Income", justify="left")
+income_label = Label(data_frame, text="Income", justify="left", bg='#474E68', fg='white', font='Helvetica 10 bold')
 income_label.grid(row=2, column=4, padx=30, pady=10)
 income_entry = ttk.Combobox(data_frame, values=[">50K", "<=50K"],width=18)
 income_entry.grid(row=2, column=5, padx=30, pady=10)
@@ -230,22 +229,22 @@ def view_data():
 
 #buttons
 
-button_frame = LabelFrame(root, text="")
+button_frame = LabelFrame(root, text="", background="#474E68")
 button_frame.pack(fill="x", expand="yes", padx=20)
 
-add_button = Button(button_frame, text="Add", command=insert_record, width=15)
+add_button = Button(button_frame, text="Add", command=insert_record, width=15, background='#F0EEED')
 add_button.grid(row=0, column=0, padx=30, pady=10)
 
-update_button = Button(button_frame, text="Update", command=update_record, width=15)
+update_button = Button(button_frame, text="Update", command=update_record, width=15, background='#F0EEED')
 update_button.grid(row=0, column=1, padx=45, pady=10)
 
-delete_button = Button(button_frame, text="Delete", command=delete_record, width=15)
+delete_button = Button(button_frame, text="Delete", command=delete_record, width=15, background='#F0EEED')
 delete_button.grid(row=0, column=2, padx=45, pady=10)
 
-clear_button = Button(button_frame, text="Clear", command=clear_entries, width=15)
+clear_button = Button(button_frame, text="Clear", command=clear_entries, width=15, background='#F0EEED')
 clear_button.grid(row=0, column=4, padx=45, pady=10)
 
-view_button = Button(button_frame, text="View", command=view_data, width=15)
+view_button = Button(button_frame, text="View", command=view_data, width=15, background='#F0EEED')
 view_button.grid(row=0, column=5, padx=20, pady=10)
 
 # bind treeview

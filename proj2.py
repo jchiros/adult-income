@@ -62,7 +62,7 @@ my_tree.heading("income", text="Income", anchor=CENTER)
 
 # rows
 my_tree.tag_configure('oddrow', background="white")
-my_tree.tag_configure('evenrow', background="#95969c")
+my_tree.tag_configure('evenrow', background="#6B728E")
 
 
 

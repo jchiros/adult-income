@@ -15,7 +15,7 @@ db = sql.Database("adult_income.db")
 style = ttk.Style()
 style.theme_use('default')
 style.configure("Treeview", background="#262729", foreground="black", rowheight=25, fieldbackground="#262729")
-style.map('Treeview', background=[('selected', "#252626")])
+style.map('Treeview', background=[('selected', "#474E68")])
 
 tree_frame = Frame(root)
 tree_frame.pack(pady=10)
@@ -177,7 +177,7 @@ def select_record(e):
 # delete record
 def delete_record():
     my_tree.tag_configure('oddrow', background="white")
-    my_tree.tag_configure('evenrow', background="#95969c")
+    my_tree.tag_configure('evenrow', background="#6B728E")
 
     ans = messagebox.askyesno("", "Are you sure you want to delete this record?")
     if ans:
@@ -214,7 +214,7 @@ def update_record():
 # insert record
 def insert_record():
     my_tree.tag_configure('oddrow', background="white")
-    my_tree.tag_configure('evenrow', background="#95969c")
+    my_tree.tag_configure('evenrow', background="#6B728E")
 
     db.insert(age_entry.get(), work_entry.get(), educ_entry.get(), occu_entry.get(), race_entry.get(), gender_entry.get(), hpr_entry.get(),nc_entry.get(), income_entry.get())
 

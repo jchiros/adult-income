@@ -1,3 +1,14 @@
+"""
+Group 1 | BSCS 3-4
+
+Carpenteros, Jasper
+Gerochi, Jhaslyn
+Guanlao, Claire
+Nebrida, Carryl
+Sandoval, Anne
+Sullos, Kristine
+"""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.widgets as widgets

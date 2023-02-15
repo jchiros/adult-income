@@ -1,3 +1,14 @@
+"""
+Group 1 | BSCS 3-4
+
+Carpenteros, Jasper
+Gerochi, Jhaslyn
+Guanlao, Claire
+Nebrida, Carryl
+Sandoval, Anne
+Sullos, Kristine
+"""
+
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
